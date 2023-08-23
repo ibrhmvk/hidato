@@ -20,15 +20,32 @@ const App = () => {
   };
 
   const solvePuzzle = () => {
+    if (hasEmptyCells(grid)) {
+      alert("Please fill all cells before submitting the puzzle.");
+      return;
+    }
+
     const solvedGrid = solveHidato(grid);
     setGrid(solvedGrid);
 
     if (isPuzzleSolved(solvedGrid)) {
       alert("Congratulations! You solved the puzzle!");
     } else {
-      alert("Sorry! Try agian");
+      alert("Sorry! Try again");
     }
   };
+
+  const hasEmptyCells = (grid: number[][]) => {
+    for (let r = 0; r < grid.length; r++) {
+      for (let c = 0; c < grid[0].length; c++) {
+        if (grid[r][c] === 0) {
+          return true;
+        }
+      }
+    }
+    return false;
+  };
+
   const isPuzzleSolved = (solvedGrid: number[][]) => {
     for (let r = 0; r < solvedGrid.length; r++) {
       for (let c = 0; c < solvedGrid[0].length; c++) {
